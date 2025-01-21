@@ -8,24 +8,13 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
+            min-height: 100vh;
+            background-color: #808080; /* Szare tło */
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
             overflow: hidden;
-            background-color: #808080; /* Szare tło */
             transition: background-color 0.5s ease;
-        }
-
-        .container {
-            text-align: center;
-            position: relative;
-        }
-
-        #message {
-            font-size: 1.5rem;
-            color: white;
-            margin-bottom: 20px;
         }
 
         button {
@@ -50,17 +39,26 @@
             cursor: not-allowed;
         }
 
-        .cats {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            justify-content: center;
+        .cats-left, .cats-right {
             position: absolute;
-            top: 20%;
-            width: 100%;
+            top: 0;
+            width: 100px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            justify-content: center;
         }
 
-        .cats img {
+        .cats-left {
+            left: 10px;
+        }
+
+        .cats-right {
+            right: 10px;
+        }
+
+        .cats-left img, .cats-right img {
             width: 100px;
             height: 100px;
             object-fit: cover;
@@ -71,21 +69,16 @@
         .happy {
             background-color: #ffc0cb; /* Bladoróżowe tło */
         }
-
-        .happy #message {
-            color: black;
-            font-size: 2rem;
-        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <p id="message">Smutne kotki czekają na Ciebie...</p>
+    <div>
         <button id="mainButton" onclick="changeMood()">Zamelduj się</button>
-        <div class="cats" id="catContainer">
-            <!-- Dodamy obrazki kotków przez JavaScript -->
-        </div>
     </div>
+
+    <!-- Smutne kotki -->
+    <div class="cats-left" id="sadCatsLeft"></div>
+    <div class="cats-right" id="sadCatsRight"></div>
 
     <script>
         // Obrazki smutnych kotków
@@ -103,18 +96,23 @@
             "https://placekitten.com/107/107"
         ];
 
-        // Dodaj smutne kotki na początku
-        const catContainer = document.getElementById("catContainer");
+        // Dodaj smutne kotki po lewej i prawej stronie
+        const sadCatsLeft = document.getElementById("sadCatsLeft");
+        const sadCatsRight = document.getElementById("sadCatsRight");
+
         sadCats.forEach(cat => {
-            const img = document.createElement("img");
-            img.src = cat;
-            catContainer.appendChild(img);
+            const imgLeft = document.createElement("img");
+            imgLeft.src = cat;
+            sadCatsLeft.appendChild(imgLeft);
+
+            const imgRight = document.createElement("img");
+            imgRight.src = cat;
+            sadCatsRight.appendChild(imgRight);
         });
 
         // Funkcja zmieniająca stronę na szczęśliwą
         function changeMood() {
             document.body.classList.add("happy");
-            document.getElementById("message").textContent = "No wkońcu wróciłaś bo się stęskniłem :)";
 
             // Zmień tekst i styl przycisku
             const button = document.getElementById("mainButton");
@@ -123,13 +121,18 @@
             button.disabled = true;
 
             // Usuń smutne kotki
-            catContainer.innerHTML = "";
+            sadCatsLeft.innerHTML = "";
+            sadCatsRight.innerHTML = "";
 
-            // Dodaj szczęśliwe kotki
+            // Dodaj szczęśliwe kotki po lewej i prawej stronie
             happyCats.forEach(cat => {
-                const img = document.createElement("img");
-                img.src = cat;
-                catContainer.appendChild(img);
+                const imgLeft = document.createElement("img");
+                imgLeft.src = cat;
+                sadCatsLeft.appendChild(imgLeft);
+
+                const imgRight = document.createElement("img");
+                imgRight.src = cat;
+                sadCatsRight.appendChild(imgRight);
             });
         }
     </script>
