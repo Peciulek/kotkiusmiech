@@ -43,16 +43,16 @@
 
         .cat {
             position: absolute;
-            width: 100px;
-            height: 100px;
+            width: 300px; /* Trzykrotnie większe kotki */
+            height: 300px; /* Trzykrotnie większe kotki */
             object-fit: cover;
             border-radius: 10px;
         }
 
         .text {
             position: absolute;
-            top: 110px;
-            left: calc(50% - 50px);
+            top: 330px; /* Dopasowane pod powiększony obrazek */
+            left: calc(50% - 150px); /* Wyśrodkowanie dla większego kotka */
             text-align: center;
             font-size: 18px;
             font-weight: bold;
@@ -70,7 +70,7 @@
     <p class="text" id="sadText">I'm sad</p>
 
     <!-- Smutne kotki -->
-    <img id="sadCatTop" class="cat" src="./sadcat1.jpg" style="top: 10px; left: calc(50% - 50px);" />
+    <img id="sadCatTop" class="cat" src="./sadcat1.jpg" style="top: 10px; left: calc(50% - 150px);" />
     <img id="sadCatLeft" class="cat" src="./sadcat2.jpg" style="top: 50%; left: 10px; transform: translateY(-50%);" />
     <img id="sadCatRight" class="cat" src="./sadcat3.jpg" style="top: 50%; right: 10px; transform: translateY(-50%);" />
 
@@ -118,4 +118,5 @@
     </script>
 </body>
 </html>
+
 
