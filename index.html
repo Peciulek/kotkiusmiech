@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smutne i szczęśliwe kotki</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            background-color: #808080; /* Szare tło */
+            transition: background-color 0.5s ease;
+        }
+
+        .container {
+            text-align: center;
+            position: relative;
+        }
+
+        #message {
+            font-size: 1.5rem;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            background-color: #4CAF50; /* Zielony przycisk */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049; /* Jaśniejszy zielony przy najechaniu */
+        }
+
+        button.disabled {
+            background-color: #ffc0cb; /* Różowy po kliknięciu */
+            color: white;
+            cursor: not-allowed;
+        }
+
+        .cats {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            position: absolute;
+            top: 20%;
+            width: 100%;
+        }
+
+        .cats img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        /* Styl szczęśliwego tła */
+        .happy {
+            background-color: #ffc0cb; /* Bladoróżowe tło */
+        }
+
+        .happy #message {
+            color: black;
+            font-size: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p id="message">Smutne kotki czekają na Ciebie...</p>
+        <button id="mainButton" onclick="changeMood()">Zamelduj się</button>
+        <div class="cats" id="catContainer">
+            <!-- Dodamy obrazki kotków przez JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        // Obrazki smutnych kotków
+        const sadCats = [
+            "https://placekitten.com/101/101",
+            "https://placekitten.com/102/102",
+            "https://placekitten.com/103/103"
+        ];
+
+        // Obrazki szczęśliwych kotków
+        const happyCats = [
+            "https://placekitten.com/104/104",
+            "https://placekitten.com/105/105",
+            "https://placekitten.com/106/106",
+            "https://placekitten.com/107/107"
+        ];
+
+        // Dodaj smutne kotki na początku
+        const catContainer = document.getElementById("catContainer");
+        sadCats.forEach(cat => {
+            const img = document.createElement("img");
+            img.src = cat;
+            catContainer.appendChild(img);
+        });
+
+        // Funkcja zmieniająca stronę na szczęśliwą
+        function changeMood() {
+            document.body.classList.add("happy");
+            document.getElementById("message").textContent = "No wkońcu wróciłaś bo się stęskniłem :)";
+
+            // Zmień tekst i styl przycisku
+            const button = document.getElementById("mainButton");
+            button.textContent = "W końcu się pojawiłaś, bo już się stęskniłem :)";
+            button.classList.add("disabled");
+            button.disabled = true;
+
+            // Usuń smutne kotki
+            catContainer.innerHTML = "";
+
+            // Dodaj szczęśliwe kotki
+            happyCats.forEach(cat => {
+                const img = document.createElement("img");
+                img.src = cat;
+                catContainer.appendChild(img);
+            });
+        }
+    </script>
+</body>
+</html>
