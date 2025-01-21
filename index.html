@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smutne i szczęśliwe kotki</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            background-color: #808080; /* Szare tło */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            transition: background-color 0.5s ease;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 40px; /* Zwiększenie rozmiaru tekstu przycisku */
+            font-weight: bold;
+            color: white;
+            background-color: #4CAF50; /* Zielony przycisk */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            z-index: 10;
+            margin-bottom: 50px; /* Dodaj margines na przycisk */
+        }
+
+        button:hover {
+            background-color: #45a049; /* Jaśniejszy zielony przy najechaniu */
+        }
+
+        button.disabled {
+            background-color: #ffc0cb; /* Różowy po kliknięciu */
+            color: white;
+            cursor: not-allowed;
+        }
+
+        .cat {
+            display: block;
+            margin: 20px auto; /* Wyśrodkowanie kotków */
+            width: 100%; /* Dostosowanie do szerokości ekranu */
+            max-width: 300px; /* Maksymalna szerokość */
+            height: auto; /* Zachowanie proporcji */
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .text {
+            margin: 20px auto;
+            text-align: center;
+            font-size: 100px; /* Zwiększenie rozmiaru tekstu */
+            font-weight: bold;
+            color: white;
+        }
+
+        .happy-text {
+            font-size: 80px; /* Duży tekst po kliknięciu */
+            color: black; /* Kolor tekstu dla szczęśliwego tła */
+        }
+
+        /* Styl szczęśliwego tła */
+        .happy {
+            background-color: #ffc0cb; /* Bladoróżowe tło */
+        }
+
+        /* Optymalizacja na urządzenia mobilne */
+        @media (max-width: 768px) {
+            button {
+                font-size: 30px;
+                padding: 10px 20px;
+            }
+
+            .text {
+                font-size: 50px; /* Mniejszy tekst na mobilnych ekranach */
+            }
+
+            .happy-text {
+                font-size: 40px;
+            }
+
+            .cat {
+                max-width: 250px; /* Zmniejszenie kotków na mniejszych ekranach */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <button id="mainButton" onclick="changeMood()">Zamelduj się</button>
+        <p class="text" id="sadText">I'm sad</p>
+
+        <!-- Smutne kotki -->
+        <img id="sadCatTop" class="cat" src="./sadcat1.jpg" />
+        <img id="sadCatLeft" class="cat" src="./sadcat2.jpg" />
+        <img id="sadCatRight" class="cat" src="./sadcat3.jpg" />
+    </div>
+
+    <script>
+        // Ścieżki do szczęśliwych kotków
+        const happyCats = [
+            "./happycat1.jpg",
+            "./happycat2.jpg",
+            "./happycat3.jpg",
+            "./happycat4.jpg"
+        ];
+
+        // Funkcja zmieniająca stronę na szczęśliwą
+        function changeMood() {
+            document.body.classList.add("happy");
+
+            // Zmień tekst i styl przycisku
+            const button = document.getElementById("mainButton");
+            button.textContent = "W końcu się pojawiłaś, bo już się stęskniłem :)";
+            button.classList.add("disabled");
+            button.disabled = true;
+
+            // Ukryj smutne kotki i tekst
+            document.getElementById("sadCatTop").style.display = "none";
+            document.getElementById("sadCatLeft").style.display = "none";
+            document.getElementById("sadCatRight").style.display = "none";
+            document.getElementById("sadText").style.display = "none";
+
+            // Dodaj szczęśliwe kotki w układzie mobilnym
+            happyCats.forEach((cat) => {
+                const img = document.createElement("img");
+                img.src = cat;
+                img.classList.add("cat");
+                document.body.appendChild(img);
+            });
+
+            // Dodaj duży tekst po kliknięciu
+            const happyText = document.createElement("p");
+            happyText.textContent = "W końcu się pojawiłaś, bo już się stęskniłem :)";
+            happyText.classList.add("happy-text");
+            document.body.appendChild(happyText);
+        }
+    </script>
+</body>
+</html>
+
+
+
